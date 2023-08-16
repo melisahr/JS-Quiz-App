@@ -70,3 +70,12 @@ hr{
 .incorrect{
     background: #ff9393;
 }
+#progress-bar{
+    background: #333;
+    width: 100%;
+}
+#bar-fill{
+    width: 100%;
+    background: #9aeabc;
+    padding-left: 10px;
+}
