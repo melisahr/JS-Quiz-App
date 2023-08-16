@@ -69,6 +69,11 @@ function showQuestion(){
         }
         button.addEventListener("click", selectAnswer);
     });
+
+    //Bar fill is updated
+    const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
+    const progressBar = document.getElementById("progress-bar");
+    progressBar.style.width = progressPercentage + "%";
 }
 //Keep the text answers 
 function resetState(){
@@ -109,6 +114,10 @@ function handleNextBtn(){
     }else{
         showScore();
     }
+//bar is updated after moving to the next question
+    const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
+    const progressBar = document.getElementById("progress-bar");
+    progressBar.style.width = progressPercentage + "%";
 }
 
 nextBtn.addEventListener("click", () => {
