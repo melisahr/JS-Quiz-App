@@ -72,8 +72,8 @@ function showQuestion(){
 
     //Bar fill is updated
     const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
-    const progressBar = document.getElementById("progress-bar");
-    progressBar.style.width = progressPercentage + "%";
+    const barFill = document.getElementById("bar-fill");
+    barFill.style.width = progressPercentage + "%";
 }
 //Keep the text answers 
 function resetState(){
@@ -114,10 +114,6 @@ function handleNextBtn(){
     }else{
         showScore();
     }
-//bar is updated after moving to the next question
-    const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
-    const progressBar = document.getElementById("progress-bar");
-    progressBar.style.width = progressPercentage + "%";
 }
 
 nextBtn.addEventListener("click", () => {
@@ -128,3 +124,24 @@ nextBtn.addEventListener("click", () => {
     }
 })
 startQuiz();
+
+const timer = document.getElementById("timer-img");
+const seconds = document.getElementById("seconds");
+let timeLeft = 15;
+let timerInterval;
+console.log(timerInterval)
+
+function startTimer(){
+    timerInterval = setInterval(updateTimer,1000);
+}
+
+function updateTimer(){
+    if(timeLeft > 0){
+        timeLeft--;
+        seconds.textContent = `{timeLeft}s`;
+    } else{
+    
+        clearInterval(timerInterval);
+        handleNextBtn();
+    }
+}
