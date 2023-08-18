@@ -15,13 +15,30 @@ body{
     border-radius: 1rem;
     padding: 30px;
 }
+.top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .container h1{
     font-size: 25px;
     color: #001e4d;
     font-weight: 600;
 }
+.timer{
+    background:#e1f5fe;
+    padding: 0.4em 1em;
+    border-radius: 5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#timer-img{
+    width: 2rem;
+}
 hr{
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 .quiz{
     padding: 2rem 0;
