@@ -87,12 +87,18 @@ hr{
 .incorrect{
     background: #ff9393;
 }
-#progress-bar{
-    background: #333;
+#progress-bar {
+    height: 20px;
     width: 100%;
+    background-color: #ddd;
+    border-radius: 1rem;
+    overflow: hidden;
+   
 }
 #bar-fill{
-    width: 100%;
-    background: #9aeabc;
-    padding-left: 10px;
+    height: 100%;
+    width: 0%;
+    background: #4caf50;
+    border-radius: 1rem;
+    transition: width 0.5s ease-in-out;
 }
