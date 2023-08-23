@@ -39,14 +39,41 @@ const questions = [
 const questionElement = document.getElementById("question");
 const answerBtns = document.getElementById("answer-btns");
 const nextBtn = document.getElementById("next-btn");
+const timerSeconds = document.getElementById("seconds");
 
 let currentQuestionIndex = 0;
 let score = 0;
+let countdownTime = 15;
 
+let timerInterval;
+
+//Timer
+function startTimer(){
+    updateTimer();
+    timerInterval = setInterval(function(){
+        countdownTime--;
+        updateTimer();
+        if(countdownTime === 0){
+            clearInterval(timerInterval);
+            selectAnswer();
+            handleNextBtn();
+        }
+    },1000)
+}
+function resetTimer(){
+    clearInterval(timerInterval);
+    countdownTime = 15;
+    startTimer();
+}
+function updateTimer(){
+    timerSeconds.textContent = countdownTime +'s';
+}
+//Quiz Starts
 function startQuiz(){
     currentQuestionIndex = 0;
     score = 0;
     nextBtn.innerHTML = "Next";
+    startTimer();
     showQuestion();
 }
 //Display question with question number
@@ -100,6 +127,8 @@ function selectAnswer(e){
         button.disabled = true;
     });
     nextBtn.style.display ="block";
+    // Clear the timer 
+    clearInterval(timerInterval);
 }
 function showScore(){
     resetState();
@@ -110,6 +139,8 @@ function showScore(){
 function handleNextBtn(){
     currentQuestionIndex++;
     if(currentQuestionIndex < questions.length){
+         //timer resets on the next question
+         resetTimer();
         showQuestion();
     }else{
         showScore();
@@ -124,24 +155,3 @@ nextBtn.addEventListener("click", () => {
     }
 })
 startQuiz();
-
-const timer = document.getElementById("timer-img");
-const seconds = document.getElementById("seconds");
-let timeLeft = 15;
-let timerInterval;
-console.log(timerInterval)
-
-function startTimer(){
-    timerInterval = setInterval(updateTimer,1000);
-}
-
-function updateTimer(){
-    if(timeLeft > 0){
-        timeLeft--;
-        seconds.textContent = `{timeLeft}s`;
-    } else{
-    
-        clearInterval(timerInterval);
-        handleNextBtn();
-    }
-}
