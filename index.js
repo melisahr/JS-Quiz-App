@@ -64,15 +64,19 @@ function resetTimer(){
     clearInterval(timerInterval);
     countdownTime = 15;
     startTimer();
+    timerSeconds.style.display = "block";
 }
 function updateTimer(){
     timerSeconds.textContent = countdownTime +'s';
 }
+
 //Quiz Starts
 function startQuiz(){
     currentQuestionIndex = 0;
     score = 0;
     nextBtn.innerHTML = "Next";
+    resetTimer();
+    clearInterval(timerInterval);
     startTimer();
     showQuestion();
 }
@@ -111,39 +115,50 @@ function resetState(){
 }
 //Correct/inncorrect answers
 function selectAnswer(e){
+    /*const selectedBtn = e.target;
+    const isCorrect = selectedBtn.dataset.correct === 'true';*/
+    Array.from(answerBtns.children).forEach(button => {
+        button.disabled = true;
+    });
+    if(e){
     const selectedBtn = e.target;
     const isCorrect = selectedBtn.dataset.correct === 'true';
+    //Keep record of the score
     if(isCorrect){
         selectedBtn.classList.add("correct");
         score++;
     }else{
         selectedBtn.classList.add("incorrect");
     }
-    //Disable to select only one answer & enable the nextBtn
+}else{
     Array.from(answerBtns.children).forEach(button => {
-        if(button.dataset.correct === "true"){
-            button.classList.add("correct");
-        }
-        button.disabled = true;
-    });
-    nextBtn.style.display ="block";
+         if(button.dataset.correct === "true"){
+             button.classList.add("correct");
+         }
+            
+     });
+}
+button.disabled = true;
+nextBtn.style.display = "block";
     // Clear the timer 
     clearInterval(timerInterval);
 }
+
 function showScore(){
     resetState();
     questionElement.innerHTML =`You scored ${score} out of ${questions.length}!`;
     nextBtn.innerHTML = "Play Again";
     nextBtn.style.display = "block";
+    timerSeconds.style.display = "none";
 }
 function handleNextBtn(){
     currentQuestionIndex++;
     if(currentQuestionIndex < questions.length){
-         //timer resets on the next question
-         resetTimer();
+        //timer resets on the next question
+        resetTimer();
         showQuestion();
     }else{
-        showScore();
+        showScore();   
     }
 }
 
