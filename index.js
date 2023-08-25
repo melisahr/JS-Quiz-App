@@ -136,10 +136,8 @@ function selectAnswer(e){
              button.classList.add("correct");
          }
             
-     });
-}
-button.disabled = true;
-nextBtn.style.display = "block";
+    checkAnswer();
+    nextBtn.style.display ="block";
     // Clear the timer 
     clearInterval(timerInterval);
 }
