@@ -101,7 +101,7 @@ function showQuestion(){
         button.addEventListener("click", selectAnswer);
     });
 
-    //Bar fill is updated
+//Bar fill is updated
     const progressPercentage = ((currentQuestionIndex + 1) / questions.length) * 100;
     const barFill = document.getElementById("bar-fill");
     barFill.style.width = progressPercentage + "%";
@@ -113,32 +113,29 @@ function resetState(){
         answerBtns.removeChild(answerBtns.firstChild);
     }
 }
-//Correct/inncorrect answers
-function selectAnswer(e){
-    /*const selectedBtn = e.target;
-    const isCorrect = selectedBtn.dataset.correct === 'true';*/
-    Array.from(answerBtns.children).forEach(button => {
-        button.disabled = true;
-    });
+
+function selectAnswer(e) {
+    //selecting an answer
     if(e){
     const selectedBtn = e.target;
     const isCorrect = selectedBtn.dataset.correct === 'true';
-    //Keep record of the score
-    if(isCorrect){
-        selectedBtn.classList.add("correct");
-        score++;
-    }else{
-        selectedBtn.classList.add("incorrect");
-    }
-}else{
+    //Keep record of the score 
+        if (isCorrect) {
+            selectedBtn.classList.add("correct");
+            score++;
+        } else {
+            selectedBtn.classList.add("incorrect");
+        }
+    } 
+    // Disable all answer buttons
     Array.from(answerBtns.children).forEach(button => {
-         if(button.dataset.correct === "true"){
-             button.classList.add("correct");
-         }
-            
-    checkAnswer();
-    nextBtn.style.display ="block";
-    // Clear the timer 
+            if (button.dataset.correct === "true") {
+                button.classList.add("correct");
+            }
+            button.disabled = true;
+    });
+    //Display nextbtn & clear timer
+    nextBtn.style.display = "block";
     clearInterval(timerInterval);
 }
 
